@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .chart {
+        font: 12px sans-serif;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="../assets/js/drawWaterfallChart.js"></script>
+    <script src="../assets//js/consts.js"></script>
+  </head>
+
+  <body>
+    <div class="row">
+      <div id="SetCategory" class="col-xl-3 accordion">
+      </div>
+      <span id="PLChart" class="col-xl-3"></span>
+      <span id="ACChart" class="col-xl-3"></span>
+      <span id="DeltaChart" class="col-xl-3"></span>
+
+    </div>
+  </body>
+  <script>
+    HorizontalWaterfallChart("#PLChart", makeData(pl_data), 1000, { svgWidth: 500, svgHeight: 1000 }, "PL");
+    HorizontalWaterfallChart('#ACChart', makeData(ac_data), 1000, { svgWidth:500, svgHeight: 1000 }, "AC");
+    HorizontalWaterfallChart('#DeltaChart', calculateAbsDelta(pl_data, ac_data), 300, { svgWidth: 500, svgHeight: 1000 }, "Delta");
+  </script>
+</html>

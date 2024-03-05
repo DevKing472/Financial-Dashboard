@@ -1,8 +1,10 @@
 function drawBarChart() {
-  
+  const barChart = document.getElementById('barChart');
+  barChart.innerHTML = "";
+
   const barMargin = { top: 10, right: 30, bottom: 20, left: 50 },
-    barWidth = 460 - barMargin.left - barMargin.right,
-    barHeight = 400 - barMargin.top - barMargin.bottom;
+    barWidth = barChart.clientWidth - barMargin.left - barMargin.right,
+    barHeight = barChart.clientWidth- barMargin.top - barMargin.bottom;
   
   // append the svg object to the body of the page
   const batSVG = d3
@@ -15,10 +17,11 @@ function drawBarChart() {
   
   // Parse the Data
   d3.csv(
-    "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_stacked.csv",
+    "/assets/rec_pay.csv",
     function (data) {
       // List of subgroups = header of the csv files = soil condition here
       const subgroups = data.columns.slice(1);
+      console.log(subgroups);
   
       // List of groups = species here = value of the first column called group -> I show them on the X axis
       const groups = d3

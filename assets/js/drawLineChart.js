@@ -1,7 +1,11 @@
 function createLineChart() {
+  const lineChart = document.getElementById('lineChart');
+  lineChart.innerHTML = "";
+
+  console.log(lineChart.clientWidth);
   const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = lineChart.clientWidth - margin.left - margin.right,
+    height = lineChart.clientWidth/2 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg = d3

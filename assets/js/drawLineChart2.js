@@ -1,7 +1,12 @@
 function drawLineChart2() {
+  const lineChart2 = document.getElementById('lineChart2');
+  lineChart2.innerHTML = "";
+
+  
+  console.log(lineChart2.clientWidth);
   let CRLmargin = {top: 10, right: 30, bottom: 30, left: 60},
-      CRLwidth = 460 - CRLmargin.left - CRLmargin.right,
-      CRLheight= 400 - CRLmargin.top - CRLmargin.bottom;
+      CRLwidth = lineChart2.clientWidth - CRLmargin.left - CRLmargin.right,
+      CRLheight= lineChart2.clientWidth/2 - CRLmargin.top - CRLmargin.bottom;
   
   // append the svg object to the body of the page
   let svg = d3.select("#lineChart2")

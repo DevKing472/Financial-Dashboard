@@ -1,5 +1,8 @@
 function drawPieChart() {
-  const Piewidth = 300, Pieheight = 300, Piemargin = 20;
+  const pieChart = document.getElementById("pieChart");
+  pieChart.innerHTML = "";
+
+  const Piewidth = pieChart.clientWidth, Pieheight = pieChart.clientWidth, Piemargin = 20;
   let radius = Math.min(Piewidth, Pieheight) / 2 - Piemargin
 
   const svg = d3.select("#pieChart")
@@ -13,12 +16,9 @@ function drawPieChart() {
   let data = {a: 9, b: 20, c:30, d:8, e:12}
   let xdomain = Object.keys(data);
 
-  console.log(xdomain, d3.schemeDark2);
-
   // set the color scale
   let color = d3.scaleOrdinal()
-    .domain(xdomain)
-    .range(d3.schemeDark2);
+    .domain(xdomain);
 
   // draw piechart
   let pie = d3.pie()
