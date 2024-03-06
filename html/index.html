@@ -44,13 +44,7 @@
               <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Deals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">News</a>
+              <a class="nav-link" href="waterfall.html">View</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact</a>
@@ -256,7 +250,7 @@
                 />
                 Total Accounts Receivable and Payable Aging
               </div>
-              <div id="barChart" class="card-body" style="width: 100%"></div>
+              <div id="barChart1" class="card-body" style="width: 100%"></div>
             </div>
           </div>
         </div>
@@ -302,6 +296,54 @@
                 <div class="card-body">
                   <div class="row justify-content-center align-items-center">
                     <div id="lineChart" style="width: 100%"></div>
+                    <!-- <div id="pieChart" style="width: 50%;"></div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-auto">
+          <div class="col-lg-12 col-xl-6">
+            <div class="card custom-chart-panel">
+              <div class="card-header">
+                <img
+                  src="/assets/img/3DGraph.png"
+                  style="
+                    width: 50px;
+                    height: 50px;
+                    position: relative;
+                    text-align: center;
+                  "
+                />
+                Global Financial Performance
+              </div>
+
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="barChart2" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 col-xl-6">
+            <div class="card custom-chart-panel">
+              <div class="card-header">
+                <img
+                  src="/assets/img/Calendar_time.png"
+                  style="
+                    width: 50px;
+                    height: 50px;
+                    position: relative;
+                    text-align: center;
+                  "
+                />
+                Short Term Assets
+              </div>
+              <div class="card-body">
+                <div class="card-body">
+                  <div class="row justify-content-center align-items-center">
+                    <div id="stackedBarChart" style="width: 100%"></div>
                     <!-- <div id="pieChart" style="width: 50%;"></div> -->
                   </div>
                 </div>
@@ -387,7 +429,7 @@
     <script src="../assets/js/drawLineChart.js"></script>
     <script src="../assets/js/drawLineChart2.js"></script>
     <script src="../assets/js/drawBarChart.js"></script>
-    <!-- <script src="../assets/js/drawPieChart.js"></script> -->
+    <script src="../assets/js/drawStackedBarChart.js"></script>
     <script src="../assets/js/drawProgressChart.js"></script>
     <script src="../assets/js/consts.js"></script>
 
@@ -417,9 +459,11 @@
           "green",
           `${data.dpo} Days`,
         );
-        drawBarChart();
+        drawBarChart("#barChart1", "/assets/rec_pay.csv", 100000);
+        drawBarChart("#barChart2", "/assets/shortterm_assets.csv",60);
         createLineChart();
         drawLineChart2();
+        drawStackedBarChart();
         // drawPieChart();
       };
 

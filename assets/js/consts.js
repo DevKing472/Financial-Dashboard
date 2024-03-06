@@ -51,6 +51,9 @@ var pl_data = [
     { name: "South Carolina", value: 358 },
     { name: "Virginia", value: 199 },
   ];
+
+
+
 document.getElementById("h3-total-receive").innerHTML = `$${revenue_status.total_receive.toLocaleString()}`;
 document.getElementById("h3-total-pay").innerHTML = `$${revenue_status.total_pay.toLocaleString()}`;
 document.getElementById("h2-equity-ratio").innerHTML = `${revenue_status.equity_ratio.toLocaleString()}%`;

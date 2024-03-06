@@ -18,11 +18,12 @@ function calculateAbsDelta(arr1, arr2) {
     name: item.name,
     value: arr2[index].value - item.value,
   }));
+  console.log(deltaArray);
   let DeltaData = [];
   DeltaData = deltaArray.map((item, index) => (
     {
     name: item.name,
-    count: item.value,
+    count: Math.abs(item.value),
     end: (item.value > 0) ? item.value:0
   }));
   console.log(DeltaData);
@@ -31,13 +32,15 @@ function calculateAbsDelta(arr1, arr2) {
 
 }
 
-function HorizontalWaterfallChart(attachTo, data, maxData, svgOption = { svgHeight: 500, svgWidth: 500 }, title) {
+function HorizontalWaterfallChart(attachTo, data, maxData, title) {
   maxData += 10;
-  let { svgHeight, svgWidth } = svgOption;
+  const waterfallChart = document.getElementsByClassName('waterfallchart')[0];
+  let svgWidth = waterfallChart.clientWidth,svgHeight= 1000;
   let numTicks = 5;
   let recWidth = d3.min([50, svgHeight / data.length]); // Minimum width of the rect 50px;
   let barPadding = 10;
   let leftMargin = 60;
+
 
   let lineHeight = data.length * recWidth;
   // Append the chart and pad it a bit
@@ -49,7 +52,7 @@ function HorizontalWaterfallChart(attachTo, data, maxData, svgOption = { svgHeig
   let x = d3.scale
     .linear()
     .domain([0, maxData])
-    .range(["0px", `${svgOption.svgWidth * 0.8}px`]);
+    .range(["0px", `${svgWidth * 0.8}px`]);
   // X-axis Label
   chart
     .append("g")

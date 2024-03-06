@@ -1,6 +1,7 @@
-function drawBarChart() {
-  const barChart = document.getElementById('barChart');
+function drawBarChart(selector, dataURL, maxData) {
+  const barChart = document.getElementById(selector.slice(1));
   barChart.innerHTML = "";
+  console.log(dataURL);
 
   const barMargin = { top: 10, right: 30, bottom: 20, left: 50 },
     barWidth = barChart.clientWidth - barMargin.left - barMargin.right,
@@ -8,7 +9,7 @@ function drawBarChart() {
   
   // append the svg object to the body of the page
   const batSVG = d3
-    .select("#barChart")
+    .select(barChart)
     .append("svg")
     .attr("width", barWidth + barMargin.left + barMargin.right)
     .attr("height", barHeight + barMargin.top + barMargin.bottom)
@@ -17,11 +18,11 @@ function drawBarChart() {
   
   // Parse the Data
   d3.csv(
-    "/assets/rec_pay.csv",
+    dataURL,
     function (data) {
+      console.log(data);
       // List of subgroups = header of the csv files = soil condition here
       const subgroups = data.columns.slice(1);
-      console.log(subgroups);
   
       // List of groups = species here = value of the first column called group -> I show them on the X axis
       const groups = d3
@@ -38,7 +39,7 @@ function drawBarChart() {
         .call(d3.axisBottom(x).tickSize(0));
   
       // Add Y axis
-      const y = d3.scaleLinear().domain([0, 40]).range([barHeight, 0]);
+      const y = d3.scaleLinear().domain([0, maxData]).range([barHeight, 0]);
       batSVG.append("g").call(d3.axisLeft(y));
   
       // Another scale for subgroup position?
@@ -47,12 +48,11 @@ function drawBarChart() {
         .domain(subgroups)
         .range([0, x.bandwidth()])
         .padding([0.05]);
-  
       // color palette = one color per subgroup
       const color = d3
         .scaleOrdinal()
         .domain(subgroups)
-        .range(["#e41a1c", "#377eb8", "#4daf4a"]);
+        .range(["#e41a1c", "#377eb8"]);
   
       // Show the bars
       batSVG
