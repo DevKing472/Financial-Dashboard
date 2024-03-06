@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="../assets/vendor/animate/animate.css" />
     <link rel="stylesheet" href="../assets/css/theme.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="../assets/js/d3.min.js"></script>
 
     <!-- <script src="js/dimple.v2.3.0.min.js"></script> -->
   </head>
@@ -66,7 +66,7 @@
                 <div class="card custom-chart-panel">
                   <div class="card-body">
                     <img
-                      src="/assets/img/Leadership.png"
+                      src="../assets/img/Leadership.png"
                       style="
                         width: 100%;
                         height: 100%;
@@ -92,7 +92,7 @@
                 <div class="card custom-chart-panel">
                   <div class="card-body">
                     <img
-                      src="/assets/img/Graph.png"
+                      src="../assets/img/Graph.png"
                       style="
                         width: 100%;
                         height: 100%;
@@ -118,7 +118,7 @@
                 <div class="card custom-chart-panel">
                   <div class="card-body">
                     <img
-                      src="/assets/img/Calendar_time.png"
+                      src="../assets/img/Calendar_time.png"
                       style="
                         width: 100%;
                         height: 100%;
@@ -146,7 +146,7 @@
                 <div class="card custom-chart-panel">
                   <div class="card-body">
                     <img
-                      src="/assets/img/calendar.png"
+                      src="../assets/img/calendar.png"
                       style="
                         width: 100%;
                         height: 100%;
@@ -240,7 +240,7 @@
             <div class="card custom-chart-panel">
               <div class="card-header">
                 <img
-                  src="/assets/img/Leadership.png"
+                  src="../assets/img/Leadership.png"
                   style="
                     width: 50px;
                     height: 50px;
@@ -250,7 +250,10 @@
                 />
                 Total Accounts Receivable and Payable Aging
               </div>
-              <div id="barChart1" class="card-body" style="width: 100%"></div>
+              <div class="card-body">
+                <div id="legend-barChart1" class="legend"></div>
+                <div id="barChart1" class="card-body" style="width: 100%"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -260,7 +263,7 @@
             <div class="card custom-chart-panel">
               <div class="card-header">
                 <img
-                  src="/assets/img/Gift.png"
+                  src="../assets/img/Gift.png"
                   style="
                     width: 50px;
                     height: 50px;
@@ -273,6 +276,7 @@
 
               <div class="card-body">
                 <div class="card-body">
+                  <div id="legend-lineChart2"></div>
                   <div id="lineChart2" style="width: 100%"></div>
                 </div>
               </div>
@@ -282,7 +286,7 @@
             <div class="card custom-chart-panel">
               <div class="card-header">
                 <img
-                  src="/assets/img/Graph.png"
+                  src="../assets/img/Graph.png"
                   style="
                     width: 50px;
                     height: 50px;
@@ -295,8 +299,8 @@
               <div class="card-body">
                 <div class="card-body">
                   <div class="row justify-content-center align-items-center">
+                    <div id="legend-lineChart"></div>
                     <div id="lineChart" style="width: 100%"></div>
-                    <!-- <div id="pieChart" style="width: 50%;"></div> -->
                   </div>
                 </div>
               </div>
@@ -308,7 +312,7 @@
             <div class="card custom-chart-panel">
               <div class="card-header">
                 <img
-                  src="/assets/img/3DGraph.png"
+                  src="../assets/img/3DGraph.png"
                   style="
                     width: 50px;
                     height: 50px;
@@ -321,6 +325,7 @@
 
               <div class="card-body">
                 <div class="card-body">
+                  <div id="legend-barChart2" class="legend"></div>
                   <div id="barChart2" style="width: 100%"></div>
                 </div>
               </div>
@@ -330,7 +335,7 @@
             <div class="card custom-chart-panel">
               <div class="card-header">
                 <img
-                  src="/assets/img/Calendar_time.png"
+                  src="../assets/img/Calendar_time.png"
                   style="
                     width: 50px;
                     height: 50px;
@@ -342,10 +347,8 @@
               </div>
               <div class="card-body">
                 <div class="card-body">
-                  <div class="row justify-content-center align-items-center">
-                    <div id="stackedBarChart" style="width: 100%"></div>
-                    <!-- <div id="pieChart" style="width: 50%;"></div> -->
-                  </div>
+                  <div id="legend-stackedBarChart" class="legend"></div>
+                  <div id="stackedBarChart" style="width: 100%"></div>
                 </div>
               </div>
             </div>
@@ -432,6 +435,11 @@
     <script src="../assets/js/drawStackedBarChart.js"></script>
     <script src="../assets/js/drawProgressChart.js"></script>
     <script src="../assets/js/consts.js"></script>
+    <script src="../assets/default_rec_pay.js"></script>
+    <script src="../assets/default_global_performance.js"></script>
+    <script src="../assets/default_OneCatSevNumOrdered.js"></script>
+    <script src="../assets/default_shortterm_assets.js"></script>
+    <script src="../assets/default_TwoNumOrdered_comma.js"></script>
 
     <script>
       const onDrawCharts = () => {
@@ -459,12 +467,11 @@
           "green",
           `${data.dpo} Days`,
         );
-        drawBarChart("#barChart1", "/assets/rec_pay.csv", 100000);
-        drawBarChart("#barChart2", "/assets/shortterm_assets.csv",60);
+        drawBarChart("#barChart1", "#legend-barChart1", "../assets/rec_pay.csv", 100000, default_rec_pay);
+        drawBarChart("#barChart2", "#legend-barChart2", "../global_performance.csv",60, default_global_performance);
+        drawStackedBarChart("#stackedBarChart", "#legend-stackedBarChart", "../assets/shortterm_assets.csv",100, default_shortterm_assets);
         createLineChart();
         drawLineChart2();
-        drawStackedBarChart();
-        // drawPieChart();
       };
 
       $(document).ready(onDrawCharts);

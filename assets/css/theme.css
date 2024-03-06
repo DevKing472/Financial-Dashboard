@@ -1938,6 +1938,13 @@ a.text-dark:focus {
   fill: white;
 }
 
+.legend {
+  position: absolute;
+  top: 50px;
+  left: 60%;
+}
+
+
 table {
   border-collapse: collapse;
   border: 0px;
